@@ -7,6 +7,7 @@ Create Date: 2018-09-12 07:56:09.209760
 """
 from alembic import op
 import sqlalchemy as sa
+from sqlalchemy.schema import FetchedValue
 from sqlalchemy.dialects.postgresql import UUID
 
 # revision identifiers, used by Alembic.
@@ -23,7 +24,7 @@ def upgrade():
         sa.Column('uuid', UUID(), unique=True, nullable=False),
         sa.Column('name', sa.Text, nullable=False),
         sa.Column('date_created', sa.DateTime, nullable=False, server_default=sa.func.now()),
-        sa.Column('date_modified', sa.DateTime, nullable=False, server_default=sa.func.now(), server_onupdate=sa.func.now())
+        sa.Column('date_modified', sa.DateTime, nullable=False, server_default=sa.func.now(), server_onupdate=FetchedValue())
     )
 
 
